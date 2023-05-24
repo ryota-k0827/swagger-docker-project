@@ -1,0 +1,35 @@
+services:
+  swagger-editor:
+    image: swaggerapi/swagger-editor:v4.9.1
+    platform: linux/amd64
+    container_name: "swagger-editor"
+    ports:
+      - "8001:8080"
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui:v4.18.3
+    platform: linux/amd64
+    container_name: "swagger-ui"
+    ports:
+      - "8002:8080"
+    volumes:
+      - ./api/sample-api.yaml:/api/sample-api.yaml
+    environment:
+      SWAGGER_JSON: /api/sample-api.yaml
+
+  swagger-api:
+    image: stoplight/prism:5.0.0
+    platform: linux/amd64
+    container_name: "swagger-api"
+    ports:
+      - "8003:4010"
+    command: mock -h 0.0.0.0 /api/sample-api.yaml
+    volumes:
+      - ./api/sample-api.yaml:/api/sample-api.yaml
+
+  openapi-generator:
+    image: openapitools/openapi-generator-cli:v6.6.0
+    container_name: "openapi-generator"
+    volumes:
+      - ./api/sample-api.yaml:/api/sample-api.yaml
+      - ./api-skeleton/:/api-skeleton/
