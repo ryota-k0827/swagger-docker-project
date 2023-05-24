@@ -3,6 +3,44 @@
 ## 概要
 OpenAPIの環境をDockerで構築するためのプロジェクト
 
+## TOC
+- [swagger-docker-project](#swagger-docker-project)
+  - [概要](#概要)
+  - [TOC](#toc)
+  - [ツール概要](#ツール概要)
+    - [Stoplight Studio　← 今回はこれをメインに使う](#stoplight-studio-今回はこれをメインに使う)
+    - [Swagger Editor](#swagger-editor)
+    - [Swagger UI](#swagger-ui)
+    - [Stoplight Prism](#stoplight-prism)
+  - [動作確認環境](#動作確認環境)
+  - [セットアップ](#セットアップ)
+    - [1. リポジトリをクローンする](#1-リポジトリをクローンする)
+    - [2. ディレクトリに移動する](#2-ディレクトリに移動する)
+    - [3. VSCodeの拡張機能をインストールする](#3-vscodeの拡張機能をインストールする)
+    - [4. Stoplight Studioをインストール](#4-stoplight-studioをインストール)
+    - [5. Dockerコンテナを構築する（Swagger Editor, Swagger UI, Stoplight Prismを使用する場合）](#5-dockerコンテナを構築するswagger-editor-swagger-ui-stoplight-prismを使用する場合)
+  - [コンテナの操作](#コンテナの操作)
+    - [コンテナの削除（終了時）](#コンテナの削除終了時)
+
+
+## ツール概要
+
+### Stoplight Studio　← 今回はこれをメインに使う
+
+OpenAPIの仕様書（yamlファイル）をGUI操作で編集したり、モックサーバーを起動したりするためのツールです。
+
+### Swagger Editor
+
+OpenAPIの仕様書（yamlファイル）を編集するためのツールです。
+
+### Swagger UI
+
+OpenAPIの仕様書（yamlファイル）を閲覧するためのツールです。
+
+### Stoplight Prism
+
+OpenAPIの仕様書（yamlファイル）をモックサーバーとして起動するためのツールです。
+
 ## 動作確認環境
 
 ```sh
@@ -71,13 +109,29 @@ code .
 
 VSCodeの右下に「推奨拡張機能をインストール」というポップアップが出るので、「インストール」をクリックします。
 
-### 4. コンテナを起動
+
+### 4. Stoplight Studioをインストール
+
+- Homebrewでインストールする場合（推奨）
+  ```sh
+  brew install --cask stoplight-studio
+  ```
+- 公式サイトからダウンロードしてインストールする場合（メールアドレスが必要）
+  - [公式サイト](https://stoplight.io/studio) にアクセス
+  - 「Your email...」にメールアドレスを入力して、「Download for ...」をクリック
+- GitHubからダウンロードしてインストールする場合
+  - [GitHubリポジトリ](https://github.com/stoplightio/studio/releases)にアクセス
+  - プラットフォームに合わせて、最新のバージョンのダウンロードリンクをクリック
+
+### 5. Dockerコンテナを構築する（Swagger Editor, Swagger UI, Stoplight Prismを使用する場合）
+
+**5.1 コンテナを起動**
 
 ```sh
 make up
 ```
 
-### 5. ブラウザでアクセスする
+**5.2 ブラウザでアクセスする**
 
 ```sh
 # Swagger Editor
@@ -86,20 +140,14 @@ make open/swagger-editor  # http://localhost:8081
 # Swagger UI
 make open/swagger-ui      # http://localhost:8082
 
-# Swagger API(Stoplight Prism)
+# Stoplight Prism
 make open/swagger-api      # http://localhost:8083
 ```
 
-## ツール概要
+## コンテナの操作
 
-### Swagger Editor
+### コンテナの削除（終了時）
 
-OpenAPIの仕様書（yamlファイル）を編集するためのツールです。
-
-### Swagger UI
-
-OpenAPIの仕様書（yamlファイル）を閲覧するためのツールです。
-
-### Swagger API(Stoplight Prism)
-
-OpenAPIの仕様書（yamlファイル）をモックサーバーとして起動するためのツールです。
+```sh
+make down
+```
