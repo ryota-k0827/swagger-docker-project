@@ -89,3 +89,17 @@ make open/swagger-ui      # http://localhost:8082
 # Swagger API(Stoplight Prism)
 make open/swagger-api      # http://localhost:8083
 ```
+
+## ツール概要
+
+### Swagger Editor
+
+OpenAPIの仕様書（yamlファイル）を編集するためのツールです。
+
+### Swagger UI
+
+OpenAPIの仕様書（yamlファイル）を閲覧するためのツールです。
+
+### Swagger API(Stoplight Prism)
+
+OpenAPIの仕様書（yamlファイル）をモックサーバーとして起動するためのツールです。

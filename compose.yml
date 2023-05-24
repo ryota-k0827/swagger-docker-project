@@ -27,9 +27,9 @@ services:
     volumes:
       - ./api/sample-api.yaml:/api/sample-api.yaml
 
-  openapi-generator:
-    image: openapitools/openapi-generator-cli:v6.6.0
-    container_name: "openapi-generator"
-    volumes:
-      - ./api/sample-api.yaml:/api/sample-api.yaml
-      - ./api-skeleton/:/api-skeleton/
+  # openapi-generator:
+  #   image: openapitools/openapi-generator-cli:v6.6.0
+  #   container_name: "openapi-generator"
+  #   volumes:
+  #     - ./api/sample-api.yaml:/api/sample-api.yaml
+  #     - ./api-skeleton/:/api-skeleton/
