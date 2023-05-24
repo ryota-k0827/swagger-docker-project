@@ -109,6 +109,7 @@ code .
 
 VSCodeの右下に「推奨拡張機能をインストール」というポップアップが出るので、「インストール」をクリックします。
 
+<img width="440" alt="スクリーンショット 2023-05-22 10 04 45" src="https://github.com/ryota-k0827/swagger-docker-project/assets/50436249/7f6714ae-e895-4bd4-a2ba-b2f6b37fc817">
 
 ### 4. Stoplight Studioをインストール
 
