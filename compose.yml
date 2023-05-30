@@ -13,23 +13,23 @@ services:
     ports:
       - "8002:8080"
     volumes:
-      - ./api/sample-api.yaml:/api/sample-api.yaml
+      - docs/api.yaml:/reference/api.yaml
     environment:
-      SWAGGER_JSON: /api/sample-api.yaml
+      SWAGGER_JSON: /reference/api.yaml
 
   swagger-api:
     image: stoplight/prism:5.0.0
     platform: linux/amd64
     container_name: "swagger-api"
     ports:
-      - "8003:4010"
-    command: mock -h 0.0.0.0 /api/sample-api.yaml
+      - "9000:4010"
+    command: mock -h 0.0.0.0 /reference/api.yaml
     volumes:
-      - ./api/sample-api.yaml:/api/sample-api.yaml
+      - docs/api.yaml:/reference/api.yaml
 
   # openapi-generator:
   #   image: openapitools/openapi-generator-cli:v6.6.0
   #   container_name: "openapi-generator"
   #   volumes:
-  #     - ./api/sample-api.yaml:/api/sample-api.yaml
+  #     - docs/api.yaml:/reference/api.yaml
   #     - ./api-skeleton/:/api-skeleton/

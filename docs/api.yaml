@@ -1,0 +1,341 @@
+openapi: 3.0.0
+x-stoplight:
+  id: oagycptz2xluj
+info:
+  title: api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:9000'
+paths:
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: ユーザーID
+    get:
+      summary: ユーザー情報取得
+      tags:
+        - user
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Example 1:
+                  value:
+                    id: 0
+                    name: string
+                    ruby: string
+                    email: user@example.com
+                    belonging: string
+                    product: string
+                    feature: string
+                    tunag: 'http://example.com'
+                    seatId: 0
+        '404':
+          description: User Not Found
+      operationId: get-users-userId
+      description: ''
+    patch:
+      summary: プロフィール編集
+      operationId: patch-users-userId
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: User Not Found
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                ruby:
+                  type: string
+                belonging:
+                  type: string
+                feature:
+                  type: string
+                tunag:
+                  type: string
+                  format: uri
+              required:
+                - id
+            examples:
+              Example 1:
+                value:
+                  id: 0
+                  ruby: string
+                  belonging: string
+                  feature: string
+                  tunag: 'http://example.com'
+          application/xml:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: string
+        description: Patch user properties to update.
+      tags:
+        - user
+    post:
+      summary: ユーザー登録
+      operationId: post-users-userId
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+              required:
+                - name
+                - email
+            examples:
+              Example 1:
+                value:
+                  name: string
+                  email: user@example.com
+      description: ''
+      tags:
+        - user
+  /products:
+    get:
+      summary: プロダクトリスト取得
+      tags:
+        - products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+              examples:
+                Example 1:
+                  value:
+                    - id: 1
+                      name: string
+                    - id: 2
+                      name: string
+                    - id: 3
+                      name: string
+                    - id: 4
+                      name: string
+                    - id: 5
+                      name: string
+                    - id: 6
+                      name: string
+                    - id: 7
+                      name: string
+        '404':
+          description: Not Found
+      operationId: get-products
+      description: プロダクトリスト取得
+  /projects:
+    parameters: []
+    get:
+      summary: プロジェクトリスト取得
+      tags:
+        - projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  code:
+                    type: integer
+                  name:
+                    type: string
+                  rep:
+                    type: string
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+              examples:
+                Example 1:
+                  value:
+                    id: 0
+                    code: 0
+                    name: string
+                    rep: string
+                    users:
+                      - id: 1
+                        name: string
+                      - id: 2
+                        name: string
+                      - id: 3
+                        name: string
+        '404':
+          description: Not Found
+      operationId: get-projects-productId
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: productId
+          description: プロダクトID
+          required: true
+  /seats:
+    get:
+      summary: 座標取得
+      tags:
+        - seats
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    userId:
+                      type: integer
+                    userName:
+                      type: string
+              examples:
+                Example 1:
+                  value:
+                    - id: 1
+                      name: string
+                      userId: 1
+                      userName: string
+                    - id: 2
+                      name: string
+                      userId: 0
+                      userName: ''
+                    - id: 3
+                      name: string
+                      userId: 2
+                      userName: string
+      operationId: get-seats
+    post:
+      summary: 座席登録
+      tags:
+        - seats
+      responses:
+        '200':
+          description: OK
+      operationId: post-seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seatId:
+                  type: integer
+                userId:
+                  type: integer
+              required:
+                - seatId
+                - userId
+            examples:
+              Example 1:
+                value:
+                  seatId: 3
+                  userId: 2
+    delete:
+      summary: 座席登録解除
+      tags:
+        - seats
+      responses:
+        '200':
+          description: OK
+      operationId: delete-seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seatId:
+                  type: integer
+                userId:
+                  type: integer
+              required:
+                - seatId
+                - userId
+            examples:
+              Example 1:
+                value:
+                  seatId: 1
+                  userId: 1
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      x-examples:
+        Example 1:
+          id: 0
+          name: string
+          ruby: string
+          email: user@example.com
+          belonging: string
+          product: string
+          feature: string
+          tunag: 'http://example.com'
+          seatId: 0
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        ruby:
+          type: string
+        email:
+          type: string
+          format: email
+        belonging:
+          type: string
+        product:
+          type: string
+        feature:
+          type: string
+        tunag:
+          type: string
+          format: uri
+        seatId:
+          type: integer
+  securitySchemes: {}
